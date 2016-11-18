@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <style>
+    #map-canvas { width:500px; height:400px; }
+    .layer-wizard-search-label { font-family: sans-serif };
+  </style>
+  <script type="text/javascript"
+    src="https://maps.google.com/maps/api/js?sensor=false">
+  </script>
+  
+   <style type="text/css">
+      #legend {
+        background: #FFF;
+        padding: 10px;
+        margin: 2px;
+        font-size: 12px;
+        font-family: Arial, sans-serif;
+      }
+
+      
+    </style>
+ 
+  <script type="text/javascript">
+   
+
+
+
+   var map
+   var map1
+    function init() {
+      map = new google.maps.Map(document.getElementById('map-canvas'), {
+        center: new google.maps.LatLng(-12.710186326144721, 28.17771874999994),
+        zoom: 4,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+	  
+      
+	  
+	  map1 = new google.maps.FusionTablesLayer({
+        query: {
+          select: "col1",
+          from: "1xat9K9gFHwgyt6RW-kXk_I9mJWTGnTUCpDAHDvGD"
+        },
+        map: map,
+        styleId: 2,
+        //templateId: 3,
+		
+		
+   
+            //don't use the infowindows of the FTLayer
+      suppressInfoWindows:true
+    });
+      
+	  
+	  //Create a custom infowindow
+    infowindow=new google.maps.InfoWindow();
+
+
+    google.maps.event.addListener(map1, 'click', function(e) {
+      //call drawVisualization when the infowindow is ready
+      google.maps.event.addListenerOnce(infowindow,'domready',function(){
+       
+      });
+        //create the content for the infowindow
+      var node=document.createElement('div');
+
+    
+ //node.innerHTML='<iframe width="500" height="300" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?containerId=googft-gviz-canvas&amp;q=select+col1%3E%3E0%2C+col1%3E%3E1%2C+col2%3E%3E1%2C+col3%3E%3E1%2C+col4%3E%3E1%2C+col5%3E%3E1+from+1xat9K9gFHwgyt6RW-kXk_I9mJWTGnTUCpDAHDvGD+%20WHERE%20col0%3E%3E0=%27'+ e.row['number'].value +'%27+order+by+col1%3E%3E0+asc+limit+10&amp;viz=GVIZ&amp;t=COLUMN&amp;uiversion=2&amp;gco_forceIFrame=true&amp;gco_hasLabelsColumn=true&amp;width=500&amp;height=300">';   
+ //+col1%3E%3E0+%3D+&#39;AA+Clinic&#39;
+ 
+node.innerHTML='<iframe style="width: 100%;height: 150px" frameborder="0" scrolling="no" src=https://www.google.com/fusiontables/embedviz?containerId=googft-gviz-canvas&q=select+col1%3E%3E0%2C+col1%3E%3E1%2C+col2%3E%3E1%2C+col3%3E%3E1+from+1xat9K9gFHwgyt6RW-kXk_I9mJWTGnTUCpDAHDvGD+%20WHERE%20col0%3E%3E0=%27'+ e.row['number'].value +'%27+order+by+col1%3E%3E0+asc+limit+10&viz=GVIZ&t=COLUMN&uiversion=2&gco_forceIFrame=true&gco_hasLabelsColumn=true&gco_vAxes=%5B%7B%22title%22%3Anull%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%7D%2C%7B%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%7D%5D&gco_useFirstColumnAsDomain=true&gco_isStacked=false&gco_booleanRole=certainty&gco_hAxis=%7B%22useFormatFromData%22%3Atrue%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22viewWindow%22%3Anull%2C+%22viewWindowMode%22%3Anull%2C+%22textStyle%22%3A%7B%22color%22%3A%22%23222%22%2C+%22fontSize%22%3A%2214%22%7D%7D&gco_legend=top&gco_legendTextStyle=%7B%22color%22%3A%22%23222%22%2C+%22fontSize%22%3A%228%22%7D&width=300&height=150 frameborder="0" scrolling="no"/>';
+
+
+
+//&gco_vAxes=%5B%7B%22title%22%3Anull%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%7D%2C%7B%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%7D%5D&gco_useFirstColumnAsDomain=true&gco_isStacked=false&gco_booleanRole=certainty&gco_hAxis=%7B%22useFormatFromData%22%3Atrue%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22viewWindow%22%3Anull%2C+%22viewWindowMode%22%3Anull%2C+%22titleTextStyle%22%3A%7B%22color%22%3A%22%23222%22%2C+%22fontSize%22%3A%2214%22%2C+%22italic%22%3Atrue%7D%2C+%22textStyle%22%3A%7B%22color%22%3A%22%23222%22%2C+%22fontSize%22%3A%2215%22%7D%7D&gco_legend=top&gco_titleTextStyle=%7B%22color%22%3A%22%23000%22%2C+%22fontSize%22%3A%2224%22%2C+%22bold%22%3Atrue%7D&gco_legendTextStyle=%7B%22color%22%3A%22%23222%22%2C+%22fontSize%22%3A%228%22%7D&width
+
+//=true&gco_vAxes=%5B%7B%22title%22%3Anull%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%7D%2C%7B%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%7D%5D&gco_useFirstColumnAsDomain=true&gco_isStacked=false&gco_booleanRole=certainty&gco_hAxis=%7B%22useFormatFromData%22%3Atrue%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22viewWindow%22%3Anull%2C+%22viewWindowMode%22%3Anull%2C+%22titleTextStyle%22%3A%7B%22color%22%3A%22%23222%22%2C+%22fontSize%22%3A%2216%22%2C+%22italic%22%3Atrue%7D%2C+%22textStyle%22%3A%7B%22color%22%3A%22%23222%22%2C+%22fontSize%22%3A%2220%22%7D%7D&gco_legend=top&gco_titleTextStyle=%7B%22color%22%3A%22%23000%22%2C+%22fontSize%22%3A%2224%22%2C+%22bold%22%3Atrue%7D&width=300&height=150 frameborder="0" scrolling="no"/>';
+
+//">'; 
+
+//gco_vAxes=%5B%7B%22title%22%3Anull%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22titleTextStyle%22%3A%7B%22color%22%3A%22%23222%22%2C+%22fontSize%22%3A%2220%22%2C+%22italic%22%3Atrue%7D%2C+%22textStyle%22%3A%7B%22color%22%3A%22%23222%22%2C+%22fontSize%22%3A%2214%22%7D%7D%2C%7B%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%7D%5D&gco_useFirstColumnAsDomain=true&gco_isStacked=false&gco_booleanRole=certainty&gco_hAxis=%7B%22useFormatFromData%22%3Atrue%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22viewWindow%22%3Anull%2C+%22viewWindowMode%22%3Anull%2C+%22titleTextStyle%22%3A%7B%22color%22%3A%22%23222%22%2C+%22fontSize%22%3A%2215%22%2C+%22italic%22%3Atrue%7D%2C+%22textStyle%22%3A%7B%22color%22%3A%22%23222%22%2C+%22fontSize%22%3A%2214%22%7D%7D&gco_legend=top&gco_titleTextStyle=%7B%22color%22%3A%22%23000%22%2C+%22fontSize%22%3A%2216%22%2C+%22bold%22%3Atrue%7D&gco_legendTextStyle=%7B%22color%22%3A%22%23222%22%2C+%22fontSize%22%3A%228%22%7D&gco_tooltip=%7B%22isHtml%22%3Atrue%7D&tmplt=4&width
+//=300&height=150 frameborder="0" scrolling="no"/>';
+      
+
+infowindow.setOptions({position:e.latLng,content:node,map:map});
+     });
+	
+	// Create the legend and display on the map
+        var legend = document.createElement('div');
+        legend.id = 'legend';
+        var content = [];
+        
+        content.push('<h4>MAP_INDICATOR_COLOR CODE: <img src=https://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_red.png></div>/  <img src=https://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_yellow.png>/  <img src=https://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_green.png></div></p>');
+		
+        content.push('1_% Target achieved_ <80%/ 80-89%/>=90% </p>');
+		content.push('<h4>2_Growth last 2 months: <0% / 0-1.5% / >1.5% </p>');
+        content.push('<h4>3_% pre-ART patients: >=9% / 5-9% / <5% </p>');
+		content.push('<h4>4_# QB not green: >3 / 2-3 / 0-1 </p>');
+		content.push ('<img src=https://storage.googleapis.com/support-kms-prod/SNP_2752125_en_v0> Country summary/ <img src=https://maps.gstatic.com/mapfiles/ridefinder-images/mm_20_purple.png> Missing data </p>');
+		
+		legend.innerHTML = content.join('');
+        legend.index = 1;
+        map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
+      }
+	
+	
+	
+	
+      var map2= new google.maps.FusionTablesLayer({
+        query: {
+          select: "col1",
+          from: "15LFbVdtlj3cI2ZMQWo9dBFtW3NPF5gByPtzVNMeR"
+        },
+        map: map,
+        styleId: 2,
+        //templateId: 2
+   
+            //don't use the infowindows of the FTLayer
+      suppressInfoWindows:true
+    });
+      //Create a custom infowindow
+    infowindow=new google.maps.InfoWindow();
+
+
+    google.maps.event.addListener(map2, 'click', function(e) {
+      //call drawVisualization when the infowindow is ready
+      google.maps.event.addListenerOnce(infowindow,'domready',function(){
+       
+      });
+        //create the content for the infowindow
+      var node=document.createElement('div');
+
+    
+     var number=e.row['number'].value;
+	  var code2=number + "+from+1xofa27aBWi3PIjBsDgCjVK6JzQmetnSllaWLCxw5+order+by+col0+asc+limit+10&viz=GVIZ&t=LINE&uiversion=2&gco_forceIFrame=true&gco_hasLabelsColumn=true&gco_vAxes=%5B%7B%22title%22%3Anull%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%7D%2C%7B%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%7D%5D&gco_useFirstColumnAsDomain=true&gco_curveType=&gco_booleanRole=certainty&gco_lineWidth=2&gco_hAxis=%7B%22useFormatFromData%22%3Atrue%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22viewWindow%22%3Anull%2C+%22viewWindowMode%22%3Anull%2C+%22titleTextStyle%22%3A%7B%22color%22%3A%22%23222%22%2C+%22fontSize%22%3A%2212%22%2C+%22italic%22%3Atrue%7D%2C+%22textStyle%22%3A%7B%22color%22%3A%22%23222%22%2C+%22fontSize%22%3A%2210%22%7D%7D&gco_legend=top&gco_legendTextStyle=%7B%22color%22%3A%22%23222%22%2C+%22fontSize%22%3A%2212%22%7D&gco_series=%7B%220%22%3A%7B%22lineWidth%22%3A2%7D%7D&width=300&height=500/>'";
+      var code1="'<iframe style='width: 100%;height: 200px' frameborder='0' scrolling='no' src=https://www.google.com/fusiontables/embedviz?containerId=googft-gviz-canvas&q=select+col0%2C+col"
+	  
+       
+	  node.innerHTML=code1 + code2   
+
+infowindow.setOptions({position:e.latLng,content:node,map:map});
+     });
+	
+	
+	
+	
+	
+	
+	var map3 = new google.maps.FusionTablesLayer({
+        query: {
+          select: "col1",
+          from: "1i6GWrTaUwK-uagqtTOM3Pg-MIxGb50eS4OhPuh3D"
+        },
+        map: map,
+        styleId: 2,
+        //templateId: 2
+   
+            //don't use the infowindows of the FTLayer
+      suppressInfoWindows:true
+    });
+      //Create a custom infowindow
+    infowindow=new google.maps.InfoWindow();
+
+
+    google.maps.event.addListener(map3, 'click', function(e) {
+      //call drawVisualization when the infowindow is ready
+      google.maps.event.addListenerOnce(infowindow,'domready',function(){
+       
+      });
+        //create the content for the infowindow
+      var node=document.createElement('div');
+
+    
+ var number=e.row['number'].value;
+	  //var code2= number + "+from+1Di0l6Qj_OZKw3KSQOA_h5FdvZWmA6_8iRg6vPQM+order+by+col0+asc+limit+10&viz=GVIZ&t=PIE&uiversion=
+	  
+	  
+	  //2&gco_forceIFrame=true&gco_hasLabelsColumn=true&
+      //var code1="'<iframe style='width: 100%;height: 200px' frameborder='0' scrolling='no' src=https://www.google.com/fusiontables/embedviz?containerId=googft-gviz-canvas&q=select+col0%2C+col"
+	  
+	  //node.innerHTML=code1 + code2   
+	  //node.innerHTML=
+	  
+	  var code3=e.row['site 2'].value;
+	  
+	  var code1="'<iframe style='width: 100%;height: 200px' frameborder='0' scrolling='no' src=https://www.google.com/fusiontables/embedviz?containerId=googft-gviz-canvas&amp;q=select+col0%2C+col"
+	  
+	  var code2= number+"+from+1W18_p3qa8G0_23lA57K4JIL-g1JstZXp8IshFXc_+order+by+col0+asc+limit+10&amp;viz=GVIZ&amp;t=PIE&amp;uiversion=2&gco_forceIFrame=true&gco_hasLabelsColumn=true&gco_useFirstColumnAsDomain=true&gco_is3D=false&gco_pieHole=0&gco_booleanRole=certainty&gco_hAxis=%7B%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%7D&gco_vAxes=%5B%7B%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%7D%2C%7B%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%7D%5D&gco_legend=bottom&gco_title="
+	  
+	  var code4="&gco_backgroundColor=%7B%22fill%22%3A%22%23ffffff%22%7D&gco_legendTextStyle=%7B%22color%22%3A%22%23222%22%2C+%22fontSize%22%3A%228%22%7D&gco_pieSliceTextStyle=%7B%22fontSize%22%3A%2210%22%7D&gco_titleTextStyle=%7B%22color%22%3A%22%23000%22%2C+%22fontSize%22%3A%2220%22%2C+%22bold%22%3Atrue%7D&width=350&height=250/>'";
+	  
+	  //2&amp;gco_forceIFrame=true&amp;gco_hasLabelsColumn=true&amp;width=500&amp;height=300/>'";
+
+	  node.innerHTML=code1 + code2 + code3 + code4
+	  
+	  //node.innerHTML='<iframe width="500" height="300" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?containerId=googft-gviz-canvas&q=select+col0%2C+col20+from+1AI5MpqmnsYOYgy8Oy3NtCUr_q8yZGbtU9VXQttT+order+by+col0+asc+limit+10&viz=GVIZ&amp;t=PIE&amp;uiversion=2&amp;gco_forceIFrame=true&gco_hasLabelsColumn=true&width=350&height=200">';
+	  
+	  
+infowindow.setOptions({position:e.latLng,content:node,map:map});
+     });
+	 
+	 
+	 var map4 = new google.maps.FusionTablesLayer({
+        query: {
+          select: "col1>>1",
+          from: "1EgumFKu8TC5dSDFJiVCetH6M_jCHk4Plo6smM3z2"
+        },
+        map: map,
+        styleId: 2,
+        templateId: 2
+      });
+    
+
+	 
+	 
+	 
+	google.maps.event.addDomListener(window, 'load', initialize); 
+	 
+	 
+	 
+	 function selectChange(){
+var value = document.getElementById('map').value;
+  if (value =='1')
+	map1.setMap(map);
+		else if (value =='2')
+			map2.setMap(map);
+		else if (value =='3')
+			map3.setMap(map);
+		else if (value =='4')
+			map4.setMap(map);	
+			
+	else	
+		map1.setMap(null);
+			
+	$('#map').removeAttr('disabled');
+};
+</script>
+
+</head>
+<body id="body" onload="init();">
+<div id="list" style="position:absolute; right:250; top:5px; width:100px; height:25px; font-size:10px">
+<select name="map" id="map" onchange="selectChange()">
+  <option selected value="1">Map 1: Enrolments last 3 months</option>
+  <option value="2">Map 2: Census growth last 2 months</option>
+  <option value="3">Map 3: Distribution clients</option>
+  <option value="4">Map 4: Quality Bemchmarks</option>
+</select>
+</div>
+<div id="map-canvas" style="position:absolute; left:25; top:35px; width:98%; height:95%"></div>
+</body>
+</html>
