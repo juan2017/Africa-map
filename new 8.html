@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+
+    <title>Fusion Tables Layer Example: Dynamic Info Windows</title>
+   
+    <script type="text/javascript"
+      
+  src="http://maps.google.com/maps/api/js?sensor=false">
+</script>	
+<style>
+body {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+}
+
+#map-canvas {
+  height: 450px;
+  width: 800px;
+}
+</style>
+    <script type="text/javascript">
+
+var map;
+ var layer;
+
+function initialize() {
+      map = new google.maps.Map(document.getElementById('map-canvas'), {
+        center: new google.maps.LatLng(42.3309136088225, -0.8102480499999274),
+      zoom: 5,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    layer = new google.maps.FusionTablesLayer({
+      query: {
+        select: "col0",
+        from: "1MSbJksPUkVY6xtNIdYY7bEZfOE-LcPLShjFYuOLX"
+      },
+      map: map,
+	    
+        //don't use the infowindows of the FTLayer
+      suppressInfoWindows:true
+    });
+      //Create a custom infowindow
+    infowindow=new google.maps.InfoWindow();
+
+
+    google.maps.event.addListener(layer, 'click', function(e) {
+      //call drawVisualization when the infowindow is ready
+      google.maps.event.addListenerOnce(infowindow,'domready',function(){
+       
+      });
+        //create the content for the infowindow
+      var node=document.createElement('div');
+      node.innerHTML= '<iframe src=https://www.google.com/fusiontables/embedviz?containerId=googft-gviz-canvas&q=select+col0%2C+col1%2C+col2%2C+col3%2C+col4%2C+col5+from+1MSbJksPUkVY6xtNIdYY7bEZfOE-LcPLShjFYuOLX+order+by+col0+asc+limit+10&viz=GVIZ&t=COLUMN&uiversion=2&gco_forceIFrame=true&gco_hasLabelsColumn=true&width=500&height=300 frameborder="0"; scrolling="no"/>';
+      infowindow.setOptions({position:e.latLng,content:node,map:map});
+     });
+  }
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+  </head>
+  <body>
+    <div id="map-canvas" height="100%" width="80%"></div>
+  </body>
+</html>
+
+
+
